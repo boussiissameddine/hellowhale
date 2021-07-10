@@ -13,7 +13,7 @@ pipeline {
       stage("Build image") {
             steps {
                 script {
-                    myapp = docker.build("boussiissameddine/hellowhale:${env.BUILD_ID}")
+                    myapp = sudo docker.build("boussiissameddine/hellowhale:${env.BUILD_ID}")
                 }
             }
         }
@@ -21,7 +21,7 @@ pipeline {
       stage("Push image") {
             steps {
                 script {
-                    docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+                    sudo docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
                             myapp.push("latest")
                             myapp.push("${env.BUILD_ID}")
                     }
@@ -33,7 +33,7 @@ pipeline {
     stage('Deploy App') {
       steps {
         script {
-          kubernetesDeploy(configs: "hellowhale.yml", kubeconfigId: "mykubeconfig")
+          sudo kubernetesDeploy(configs: "hellowhale.yml", kubeconfigId: "mykubeconfig")
         }
       }
     }
