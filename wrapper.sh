@@ -1,5 +1,7 @@
-#!/bin/bash
+FROM nginx
 
-echo "Nginx is running..."
+COPY wrapper.sh /
 
-exec nginx -g "daemon off;"
+COPY html /usr/share/nginx/html
+
+CMD ["./wrapper.sh"]
