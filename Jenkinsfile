@@ -28,6 +28,15 @@ pipeline {
                 }
             }
         }
+    
+             stage( ' Déployer l'application ' ) {
+           pas {
+             script {
+                kubernetesDeploy( configs : " hellowhale.yml " , kubeconfigId : " mykubeconfig " )
+          
+        }
+      }
+    }
 
     
   
