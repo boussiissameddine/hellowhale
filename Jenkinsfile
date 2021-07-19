@@ -21,7 +21,7 @@ pipeline {
       stage("Push image") {
             steps {
                 script {
-                     docker.withRegistry('https://registry.hub.docker.com', 'issambits') {
+                     docker.withRegistry('https://registry.hub.docker.com', 'issambits/hellowhale') {
                             myapp.push("latest")
                             myapp.push("${env.BUILD_ID}")
                     }
